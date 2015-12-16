@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+
+    <script>
+    $(document).bind('mobileinit',function(){
+        $.mobile.changePage.defaults.changeHash = false;
+        $.mobile.hashListeningEnabled = false;
+        $.mobile.pushStateEnabled = false;
+    });
+    </script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+</head>
+<body>
+
+<div data-role="page" id="page_detail">
+    <div data-role="content">
+        <div id="div_detail_line">
+            <canvas id="chart_line_hourly" width="300" height="300"/>
+        </div>
+    </div><!-- /content -->
+
+    <div>
+        <p><h2>7am ~ 8pm</h2></p>
+        <p><h3>Steps: 1029</h3></p>
+        <p><h3>Calories: 102kcal</h3></p>
+        <p><h3>Distance: 1.05km</h3></p>
+    </div>
+
+</div><!-- /page_deatil -->
+
+<script>
+    var line_data = {
+    labels: ["6am", "7am", "8am", "9am", "10am", "11am", "12am", "1pm", "2pm", "3pm", "4pm", "5pm",
+     "6pm", "7pm", "8pm", "9pm", "10pm", "11pm", "12pm"],
+    datasets: [
+        {
+            label: "My First dataset",
+            fillColor: "rgba(220,220,220,0.2)",
+            strokeColor: "rgba(220,220,220,1)",
+            pointColor: "rgba(220,220,220,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(220,220,220,1)",
+            data: [100, 150, 230, 233, 256, 265, 265, 1500, 1510, 1520, 1522, 1750, 1800, 1888,
+            2000, 2050, 4010, 5555, 7850]
+        }
+    ]
+    };
+
+    window.onload = function(){
+				var ctx = document.getElementById("chart_line_hourly").getContext("2d");
+				window.myLine = new Chart(ctx).Line(line_data, {pointDot : true});
+			};
+</script>
+
+</body>
+</html>

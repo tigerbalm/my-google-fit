@@ -3,38 +3,66 @@
 <head>
     <title>My Page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.1.min.css" />
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-    <script type="text/javascript" src="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.1.min.js"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+
+    <script>
+    $(document).bind('mobileinit',function(){
+        $.mobile.changePage.defaults.changeHash = false;
+        $.mobile.hashListeningEnabled = false;
+        $.mobile.pushStateEnabled = false;
+    });
+    </script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
 </head>
 <body>
 
-<div data-role="page" data-theme="c">
-
-    <div data-role="header">
-        <h1>My Title</h1>
-    </div><!-- /header -->
-
+<div data-role="page" id="page_intro">
     <div data-role="content">
-        <div><p>Circle Image</p></div>
-        <div class="choice_list">
-            <ul data-role="listview" data-inset="true" data-theme="g">
-                <li><a href="#">2015/12/14</a></li>
-                <li><a href="#">2015/12/13</a></li>
-                <li><a href="#">2015/12/12</a></li>
-                <li><a href="#">2015/12/11</a></li>
-                <li><a href="#">2015/12/10</a></li>
-            </ul>
+        <div id="div_intro_canvas">
+            <canvas id="chart_pie_exercise" width="50" height="50"/>
         </div>
 
-
-        <form>
-            <label for="slider-0">Input slider:</label>
-            <input type="range" name="slider" id="slider-0" value="25" min="0" max="100"  />
-        </form>
+        <ul data-role="listview" data-inset="true">
+            <li><a href="detail.html" rel="external">2015/12/14</a></li>
+            <li><a href="detail.html" rel="external">2015/12/13</a></li>
+            <li><a href="detail.html" rel="external">2015/12/12</a></li>
+            <li><a href="detail.html" rel="external">2015/12/11</a></li>
+            <li><a href="detail.html" rel="external">2015/12/10</a></li>
+        </ul>
     </div><!-- /content -->
 
-</div><!-- /page -->
+</div><!-- /page_intro-->
+
+<script>
+    var pie_data = [
+        {
+            value: 300,
+            color:"#F7464A",
+            highlight: "#FF5A5E",
+            label: "Walking"
+        },
+        {
+            value: 50,
+            color: "#46BFBD",
+            highlight: "#5AD3D1",
+            label: "Running"
+        },
+        {
+            value: 100,
+            color: "#FDB45C",
+            highlight: "#FFC870",
+            label: "Cycling"
+        }
+    ];
+
+    window.onload = function(){
+				var ctx = document.getElementById("chart_pie_exercise").getContext("2d");
+				window.myDoughnut = new Chart(ctx).Doughnut(pie_data, {responsive : true});
+			};
+</script>
 
 </body>
 </html>
