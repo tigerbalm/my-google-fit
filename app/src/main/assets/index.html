@@ -37,26 +37,11 @@
 </div><!-- /page_intro-->
 
 <script>
-    var pie_data = [
-        {
-            value: 300,
-            color:"#F7464A",
-            highlight: "#FF5A5E",
-            label: "Walking"
-        },
-        {
-            value: 50,
-            color: "#46BFBD",
-            highlight: "#5AD3D1",
-            label: "Running"
-        },
-        {
-            value: 100,
-            color: "#FDB45C",
-            highlight: "#FFC870",
-            label: "Cycling"
-        }
-    ];
+    var pie_data = get_workout_on(new Date())
+
+    function get_workout_on(date) {
+        return JSON.parse(Android.getWorkoutDataOn(date.getTime()))
+    }
 
     window.onload = function(){
 				var ctx = document.getElementById("chart_pie_exercise").getContext("2d");
