@@ -1,12 +1,23 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply plugin: 'me.tatarka.retrolambda'
+//apply plugin: 'maven'
+apply plugin: 'signing'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.0.0-alpha3'
+    }
+}
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    buildToolsVersion "22.0.1"
 
     defaultConfig {
-        applicationId "sjun.com.mygooglefit"
         minSdkVersion 16
         targetSdkVersion 23
         versionCode 1
@@ -18,7 +29,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -26,30 +36,22 @@ android {
 }
 
 dependencies {
-    compile project(':reark')
-
     compile fileTree(dir: 'libs', include: ['*.jar'])
-
-    testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.1.0'
-    compile 'com.android.support:support-annotations:23.1.1'
-
-    compile 'com.jakewharton:butterknife:7.0.1'
-
-//    apt 'net.simonvt.schematic:schematic-compiler:0.6.4'
-//    compile 'net.simonvt.schematic:schematic:0.6.4'
-
-    compile 'com.jakewharton.timber:timber:4.1.0'
-
+    compile 'com.android.support:support-annotations:23.1.0'
     compile 'com.squareup.retrofit:retrofit:1.9.0'
 
     // RxJava
     compile 'io.reactivex:rxjava:1.0.14'
     compile 'io.reactivex:rxandroid:1.0.1'
 
-    //compile 'com.google.android.gms:play-services:8.4.0'
-    compile 'com.google.android.gms:play-services-auth:8.4.0'
-    compile 'com.google.android.gms:play-services-appindexing:8.4.0'
+    // Unit test build
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.mockito:mockito-core:1.9.5'
+    testCompile 'org.powermock:powermock-api-mockito:1.6.1'
+    testCompile 'org.powermock:powermock-module-junit4:1.6.1'
 
-    compile 'com.google.guava:guava:19.0'
+    androidTestCompile 'com.android.support:support-annotations:23.1.0'
 }
+
+//apply from: 'https://raw.github.com/chrisbanes/gradle-mvn-push/master/gradle-mvn-push.gradle'
